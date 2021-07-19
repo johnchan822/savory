@@ -1,0 +1,142 @@
+/* ----------TEXT----------- */
+
+
+$font-set: 'Noto Sans TC',  '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+// $font-set: 'Noto Sans TC',  '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+html{
+    font-size: 16px;
+    color:$color-darkgrey;
+}
+body{
+    // font-family:'Kharoshthi';
+    font-family:$font-set;
+    background-color: #fff;
+}
+h1,h2,h3,h4,h5,h6,
+a,p,b,small{
+    font:inherit;
+    color:inherit; 
+    line-height: 1.25;
+    letter-spacing: 1.2px;
+}
+/* 59 */
+h1,.h1{ font-size: 3.4rem; }
+/* 45 */
+h2,.h2{ font-size: 2.7rem; }
+/* 36 */
+h3,.h3{ font-size: 2.25rem; }
+/* 28 */
+h4,.h4{ font-size: 1.8rem; }
+/* 22 */
+h5,.h5{ font-size: 1.35rem; }
+/* 18 */
+h6,.h6{ font-size: 1.1875rem; }
+/* 16 */
+p,.p{ 
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+}
+a{
+    font-size: 1rem;
+    display: inline-block;
+    text-decoration: none;
+}
+/* 14 */
+small,.small{ font-size: .9rem; letter-spacing: .5px;}
+b, strong{ font-weight: bolder; }
+
+.ls1 { letter-spacing: 1px; }
+.ls2 { letter-spacing: 2px; }
+.ls3 { letter-spacing: 3px; }
+.ls4 { letter-spacing: 4px; }
+.ls5 { letter-spacing: 5px; }
+.ls6 { letter-spacing: 6px; }
+.ls7 { letter-spacing: 7px; }
+.ls8 { letter-spacing: 8px; }
+.ls9 { letter-spacing: 9px; }
+.ls10{ letter-spacing: 10px; }
+
+// .txt-main	  { color: #A52929; }
+
+.txt-lightmain{ color:$color-lightmain; }
+.txt-main 	  { color:$color-main; }
+.txt-darkmain { color:$color-darkmain; }
+.txt-white	  { color: #ffffff; }
+.txt-grey	  { color: #999999; }
+.txt-normal	  { color: #4d4d4d; }
+.txt-darkgrey { color: #222222; }
+.txt-black    { color: #000000; }
+.txt-silver   {
+    display: inline-block;
+    padding-bottom: 5px;
+    color: #ffffff;
+    background: #ffffff;
+    background: -webkit-linear-gradient(left, #ffffff 0% , #777777 30% , #ffffff 60% , #777777 90%);
+    background:	   -moz-linear-gradient(left, #ffffff 0% , #777777 30% , #ffffff 60% , #777777 90%);
+    background: 	 -o-linear-gradient(left, #ffffff 0% , #777777 30% , #ffffff 60% , #777777 90%);
+    background:			linear-gradient(to right, #ffffff 0% , #777777 30% , #ffffff 60% , #777777 90%);
+    -webkit-background-clip: text;
+    background-clip:         text;
+    -webkit-text-fill-color: transparent;
+}
+
+.txt-link	  { text-decoration: underline; }
+.txt-thin	  { font-weight: 100;}
+.txt-light	  { font-weight: 300;}
+.txt-regular  { font-weight: 400;}
+.txt-medium	  { font-weight: 500;}
+.txt-bold	  { font-weight: bold;}
+
+.txt-left     {text-align: left; }
+.txt-right	  {text-align: right; }
+.txt-center	  {text-align: center; }
+
+.lh-l{
+    line-height: 2.2;
+}
+
+/* ----------RWD----------------------- */
+@media screen and (max-width: 1440px){
+
+}
+@media screen and (max-width: 1366px){
+
+}
+@media screen and (max-width: 1280px){
+    // h1,.h1{ font-size: 3.7em; }
+    h2,.h2{ font-size: 2.2rem; }
+    h3,.h3{ font-size: 1.8rem; }
+    h4,.h4{ font-size: 1.5rem; }
+    h5,.h5{ font-size: 1.25rem; }
+    // h6,.h6{ font-size: 1.1rem; }
+    // p,.p{ font-size: 1rem; }
+}
+@media screen and (max-width: 1024px){
+
+}
+@media screen and (max-width: 1023px){
+    
+}
+@media screen and (max-width: 768px){
+    // h1,.h1{ font-size: 3.7rem; }
+    h2,.h2{ font-size: 1.8rem; }
+    h3,.h3{ font-size: 1.5rem; }
+    h4,.h4{ font-size: 1.3rem; }
+    h5,.h5{ font-size: 1.1rem; }
+    // h6,.h6{ font-size: 1.1rem; }
+    p,.p{ font-size: .9rrem; }
+    small,.small{ font-size: .8rem; }
+}
+@media screen and (max-width: 620px){
+
+}
+@media screen and (max-width: 480px){
+    h1,.h1{ font-size: 2.0rem; }
+    h2,.h2{ font-size: 1.6rem; }
+    h3,.h3{ font-size: 1.4rem; }
+    h4,.h4{ font-size: 1.3rem; }
+    h5,.h5{ font-size: 1.0rem; }
+    h6,.h6{ font-size: 0.95rem; }
+    p,.p{ font-size: .85rem; }
+}
