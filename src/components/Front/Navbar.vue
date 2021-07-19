@@ -199,7 +199,7 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
-@import '/assets/stylesheets/custom/hamburgers.css';
+@import '@/assets/stylesheets/custom/hamburgers';
 @import '@/assets/stylesheets/public';
 
     ::-webkit-scrollbar {
