@@ -280,14 +280,12 @@ export default {
   @media screen and(max-width:1024px) {
    .inner{
       .all_products{
+        justify-content: space-between;
         .product_item{
           width: 48%;
-          margin-right:3%;
-              &:nth-child(2n){
-              margin-right:0%;
-          }
+          margin-right:0%;
             &:nth-child(3n){
-              margin-right:3%;
+              margin-right:0%;
           }
         }
       }
@@ -300,6 +298,7 @@ export default {
      }
       .all_products{
         .product_item{
+          margin: 6% 0%;
             margin-right:0%;
           width: 100%;
               &:nth-child(3n){

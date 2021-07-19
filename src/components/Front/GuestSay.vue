@@ -27,8 +27,8 @@
                     <template v-for="(item, index) in bestSaleArrayB" :key="index">
                     <div class="s_item text_item" v-if='item.isSize=="NO"'>
                         <div class="text">
-                        <p>「忙碌了一天， <br/> 總是沒有時間好好吃一頓?。」</p>
-                        <div class="key_man"><span></span> <small>by 辛苦的工作的人</small></div>
+                        <p>「忙碌了一天， <br/> 總是沒有時間好好吃一頓。」</p>
+                        <div class="key_man"><span></span> <small>─辛苦的工作的人</small></div>
                   </div>
                     </div>
                 </template>
@@ -49,8 +49,8 @@
                 <template v-for="(item, index) in bestSaleArrayB" :key="index">
                     <div class="s_item text_item" v-if='item.isSize=="NO"'>
                         <div class="text">
-                        <p>「來趟savory， <br/> 新鮮、天然、美味」</p>
-                        <div class="key_man"><span></span> <small>by Savory主廚</small></div>
+                        <p>「來趟savory <br/> 新鮮、天然、美味」</p>
+                        <div class="key_man"><span></span> <small>─ Savory主廚</small></div>
                   </div>
                     </div>
                 </template>
@@ -185,6 +185,9 @@ export default {
   transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
+  .key_man{
+    margin-left:20px;
+  }
 }
 @media screen and(max-width:480px) {
   margin: 16% 0;

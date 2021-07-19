@@ -6,12 +6,12 @@
       </h2></router-link>
         <div class ='bar'>
         <ul class= 'middle_bar' :class="{'active':isActive,
-         'fixed':isFixed, 'other_page':isOtherPage}">
+          'fixed':isFixed, 'other_page':isOtherPage}">
             <li>
-                <router-link  to='/aboutus' @click="hamOpen">關於我們</router-link>
+                <router-link  to='/aboutus' @click='hamOpen()'>關於我們</router-link>
             </li>
               <li>
-                <router-link  to='/products/全部' @click="hamOpen">選擇餐點</router-link>
+                <router-link  to='/products/全部' @click='hamOpen()'>選擇餐點</router-link>
             </li>
         </ul>
         <ul class="icon_bar">
@@ -124,6 +124,7 @@ export default {
     hamOpen() {
       this.isActive = !this.isActive;
       // document.querySelector('body').classList.toggle('lock');
+      console.log(this.isActive);
     },
     // 取得購物車數量內容
     getCartData(status) {
@@ -325,7 +326,7 @@ body{
           }
         &.active{
           top: 80px;
-          opacity: 100%;
+          opacity: 1;
           visibility: visible;
         }
           &.other_page{

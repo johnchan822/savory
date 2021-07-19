@@ -3,16 +3,16 @@
   <div class="w1400 inner">
     <h2 class="section_title">選擇餐點</h2>
 <swiper :spaceBetween="30" :loop="false"
-:autoplay='{
-  "delay": 3000,
+:slidesPerView="1"
+:navigation="true"
+        :autoplay='{
+  "delay": 5000,
   "disableOnInteraction": false
         }'
-:slidesPerView="3"
-:navigation="true"
 :breakpoints='{
     "320": {
     "slidesPerView": 1,
-    "slidesPerGroup": 2
+    "slidesPerGroup": 1
   },
     "768": {
     "slidesPerView": 2,

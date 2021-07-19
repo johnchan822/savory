@@ -6,9 +6,9 @@
         </div>
       <div class="content">
         <h2>Savory</h2>
-        <p>如同標題般 美味且經典</p>
-        <p>為何採用新鮮食物?且美麗有趣?</p>
-          <h5>因為我們相信食物乃是一切的根源</h5>
+        <p>如同字面上美味且經典</p>
+        <p>採用新鮮無傷害自然生機小農栽種</p>
+          <h5>我們相信永續食物乃是一切的根源</h5>
         <router-link to='/aboutus' ><button class="main_btn">了解更多 <span></span>
         </button></router-link>
       </div>

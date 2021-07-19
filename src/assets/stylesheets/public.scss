@@ -52,12 +52,18 @@
     @media screen and(max-width:1440px) {
         padding-bottom: 20%;
     }
+      @media screen and(max-width:1440px) {
+        padding-bottom: 30%;
+    }
     @media screen and(max-width:768px) {
         padding-bottom: 40%;
     }
     @media screen and(max-width:480px) {
         padding-bottom: 60%;
         background-attachment: scroll;
+        .title{
+          top:150px
+        }
     }
     }
 .main_btn{

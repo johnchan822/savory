@@ -8,7 +8,7 @@
           <router-link  :to="`/product/${item.id}`"
           class="sales_item xl_size" v-if="item.level == '1'"
             :style="{backgroundImage:`url(${item.imageUrl})`}">
-                  <h5 class="ranking">No{{item.level}} </h5>
+                  <h6 class="ranking">No.{{item.level}} </h6>
                 <div class="content">
                   <h4 class="title">{{item.title}}</h4>
                     <p>{{ item.description}}</p></div>
@@ -23,9 +23,9 @@
                 class="sales_item"
                 v-if="item.level == '2'"
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <h5 class="ranking">No{{item.level}} </h5>
+                        <h6 class="ranking">No.{{item.level}} </h6>
                 <div class="content">
-                  <h5 class="title">{{item.title}}</h5>
+                  <h4 class="title">{{item.title}}</h4>
                     </div>
                   <h6 class="more">了解更多</h6>
                   </router-link>
@@ -35,9 +35,9 @@
                 class="sales_item"
                 v-if="item.level == '3'"
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <h5 class="ranking">No{{item.level}} </h5>
+                      <h6 class="ranking">No.{{item.level}} </h6>
                 <div class="content">
-                  <h5 class="title">{{item.title}}</h5>
+                  <h4 class="title">{{item.title}}</h4>
                     </div>
                   <h6 class="more">了解更多</h6>
                   </router-link>
@@ -51,7 +51,7 @@
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
                         <!-- <h4 class="ranking">{{item.level}} </h4> -->
                 <div class="content">
-                  <h5 class="title">{{item.title}}</h5>
+                  <h4 class="title">{{item.title}}</h4>
                     </div>
                   <h6 class="more">了解更多</h6>
                   </router-link>
@@ -63,7 +63,7 @@
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
                         <!-- <h4 class="ranking">{{item.level}} </h4> -->
                 <div class="content">
-                  <h5 class="title">{{item.title}}</h5>
+                  <h4 class="title">{{item.title}}</h4>
                     </div>
                   <h6 class="more">了解更多</h6>
                   </router-link>
@@ -91,12 +91,12 @@
   },
   }'
         class="mySwiper">
-      <swiper-slide v-for="(item, index) in bestSale" :key="index">
+      <swiper-slide v-for="(item, index) in filterItem" :key="index">
                 <div class="phone_sales_item"
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
                         <h4 class="ranking">No{{item.level}} </h4>
                           <div class="content">
-                    <h5  class="title">{{item.title}}</h5></div>
+                    <h4  class="title">{{item.title}}</h4></div>
                       <h6 class="more">了解更多</h6>
                           </div>
               </swiper-slide>
@@ -124,19 +124,18 @@ export default {
   props: ['bestSale'],
   data() {
     return {
-      a: [],
-      all: [],
+      filterItem: [],
     };
   },
   methods: {
     filter() {
-      // const filterItem = new Set();
+      const filterItem = new Set();
       this.bestSale.forEach((item) => {
-        if (item.level === '1') {
-          // filterItem.add(item);
+        if (item.level) {
+          filterItem.add(item);
         }
       });
-      // this.filterItem = [...filterItem];
+      this.filterItem = [...filterItem];
     },
   },
   mounted() {

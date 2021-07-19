@@ -303,14 +303,16 @@ export default {
         opacity: 1;
         transition: .3s;
     }
-    &:hover{
-      transition: .3s;
-      transform: scale(1.2);
-      &::before{
-          transition: .3s;
-          opacity: 0
-    }
+    @media screen and(min-width:600px) {
+      &:hover{
+        transition: .3s;
+        transform: scale(1.2);
+        &::before{
+            transition: .3s;
+            opacity: 0
       }
+        }
+    }
         position: relative;
         width: 100%;
         padding-bottom: 90%;
