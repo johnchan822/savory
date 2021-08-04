@@ -1,11 +1,11 @@
 <template>
   <Loading :active="isLoading"></Loading>
   <Kv></Kv>
-  <Categories></Categories>
-  <BestSale :bestSale = products></BestSale>
+  <Categories class="animated"></Categories>
+  <BestSale :bestSale = products class="animated"></BestSale>
   <Banner></Banner>
-  <GuestSay></GuestSay>
-  <About></About>
+  <GuestSay class="animated"></GuestSay>
+  <About class="animated"></About>
 </template>
 
 <script>
@@ -41,12 +41,47 @@ export default {
         this.isLoading = false;
       });
     },
+    scrollFunction() {
+      // 1.取得當前滾動位置
+      const windowScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const animated = document.querySelectorAll('.animated');
+      animated.forEach((item) => {
+        const thisPos = item.offsetTop;
+        console.log(thisPos);
+        if ((windowScrollY + windowHeight) >= thisPos) {
+          item.classList.add('fadeIn');
+          // console.log(item);
+        }
+      });
+    },
   },
   created() {
     this.getProducts();
   },
+  mounted() {
+    this.getProducts();
+    window.addEventListener('scroll', this.scrollFunction);
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.scrollFunction);
+  },
 };
+
 </script>
 <style lang="scss">
 @import '@/assets/stylesheets/main';
+.animated {
+  opacity: 0;
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
+  transform: translateY(50px);
+}
+.fadeIn {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+}
 </style>

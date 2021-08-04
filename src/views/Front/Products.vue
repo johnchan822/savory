@@ -178,7 +178,6 @@ export default {
   },
   computed: {
     filterProducts() {
-      // return this.products.filter((item) => item.category.match(this.selectCategory));
       if (this.selectCategory !== '全部') {
         return this.products.filter((item) => item.category === this.selectCategory);
       }

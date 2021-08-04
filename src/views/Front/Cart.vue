@@ -139,14 +139,15 @@
           <div>小計</div>
           <div>NT${{$filters.currency(carts.total)}}</div>
         </div>
-          <div class=" discount" v-if="coupon.final_total || '' ">
+          <div class=" discount" v-if="coupon.final_total &&  coupon_code == 'savory88' ">
             <div>折扣</div>
           <div>NT$ -{{  carts.total - Math.round(coupon.final_total)}}</div>
         </div>
         <h5 class="final_price">
           <div>總金額</div>
-          <div v-if ='coupon.final_total'>NT${{ Math.round(coupon.final_total)}}</div>
-          <div v-else >NT${{$filters.currency(Math.round(carts.total))}}</div>
+          <div v-if ="coupon.final_total &&  coupon_code == 'savory88'">
+            NT${{ Math.round(coupon.final_total)}}</div>
+          <div v-else  >NT${{$filters.currency(Math.round(carts.total))}}</div>
         </h5>
         </div>
         <Form v-slot="{ errors }" @submit="onSubmit" ref='form' class="form">
@@ -266,9 +267,10 @@
             <span v-else class="text-success">付款完成</span>
           </td>
         </tr> -->
+        <!-- TypeError: Cannot read property 'parentNode' of null -->
         </tbody>
       </table>
-      <div class="" v-if="order.is_paid === false">
+      <div>
         <h6 class="pay_btn" @click="payOrder(), link = 'four'">確認付款</h6>
       </div>
     </form>
@@ -377,7 +379,7 @@ export default {
             this.getCartData();
             this.$swal.fire({
               icon: 'success',
-              title: '以使用優惠劵',
+              title: '已使用優惠劵',
               showConfirmButton: false,
               timer: 2000,
             });
@@ -415,13 +417,6 @@ export default {
           this.$refs.form.resetForm();
           this.isLoading = false;
           this.link = 'third';
-          this.user = {
-            email: '',
-            name: '',
-            phone: '',
-            address: '',
-            message: '',
-          };
           this.$swal.fire({
             icon: 'success',
             title: '已完成訂單',

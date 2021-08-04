@@ -1,7 +1,7 @@
 <template>
   <div id="navbar" :class="{'fixed':isFixed, 'other_page':isOtherPage}">
     <div class="inner w1800">
-      <router-link to="/">  <h2 class="logo">
+      <router-link to="/"><h2 class="logo">
         Savory
       </h2></router-link>
         <div class ='bar'>

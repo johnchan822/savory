@@ -4,7 +4,7 @@
           <h2 class="section_title">主廚精選</h2>
         <div class="web_size">
           <div class="col50">
-          <template  v-for="(item, index) in bestSale" :key="index">
+          <template  v-for="(item, index) in filterItem" :key="index">
           <router-link  :to="`/product/${item.id}`"
           class="sales_item xl_size" v-if="item.level == '1'"
             :style="{backgroundImage:`url(${item.imageUrl})`}">
@@ -18,7 +18,7 @@
           </div>
           <div class="col50">
               <div class="col50">
-            <template  v-for="(item, index) in bestSale" :key="index">
+            <template  v-for="(item, index) in filterItem" :key="index">
               <router-link  :to="`/product/${item.id}`"
                 class="sales_item"
                 v-if="item.level == '2'"
@@ -30,7 +30,7 @@
                   <h6 class="more">了解更多</h6>
                   </router-link>
             </template>
-            <template  v-for="(item, index) in bestSale" :key="index">
+            <template  v-for="(item, index) in filterItem" :key="index">
               <router-link  :to="`/product/${item.id}`"
                 class="sales_item"
                 v-if="item.level == '3'"
@@ -44,7 +44,7 @@
             </template>
                 </div>
             <div class="col50">
-            <template  v-for="(item, index) in bestSale" :key="index">
+            <template  v-for="(item, index) in filterItem" :key="index">
               <router-link  :to="`/product/${item.id}`"
                 class="sales_item"
                 v-if="item.level == '4'"
@@ -56,7 +56,7 @@
                   <h6 class="more">了解更多</h6>
                   </router-link>
             </template>
-            <template  v-for="(item, index) in bestSale" :key="index">
+            <template  v-for="(item, index) in filterItem" :key="index">
                 <router-link  :to="`/product/${item.id}`"
                 class="sales_item"
                 v-if="item.level == '5'"
@@ -90,7 +90,7 @@
     "slidesPerGroup": 2
   },
   }'
-        class="mySwiper">
+     class="mySwiper">
       <swiper-slide v-for="(item, index) in filterItem" :key="index">
                 <div class="phone_sales_item"
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
@@ -124,23 +124,27 @@ export default {
   props: ['bestSale'],
   data() {
     return {
-      filterItem: [],
     };
   },
-  methods: {
-    filter() {
-      const filterItem = new Set();
-      this.bestSale.forEach((item) => {
-        if (item.level) {
-          filterItem.add(item);
+  computed: {
+    filterItem() {
+      let sorts = this.bestSale.filter((item) => {
+        if (item.level !== undefined && item.level !== '') {
+          return item;
         }
+        return false;
       });
-      this.filterItem = [...filterItem];
+      // 排序  注意這邊箭頭都需要 return
+      sorts = sorts.sort((a, b) => {
+        if (a) {
+          return a.level > b.level ? 1 : -1;
+        }
+        return false;
+      });
+      return sorts;
     },
   },
-  mounted() {
-    this.filter();
-  },
+
 };
 </script>
 <style lang="scss">

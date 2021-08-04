@@ -43,6 +43,7 @@ app.config.globalProperties.$filters = {
   date,
   currency,
 };
+
 app.config.globalProperties.$httpMessageState = $httpMessageState;
 app.use(VueSweetalert2);
 app.component('Form', Form);
