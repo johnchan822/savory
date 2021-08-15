@@ -120,7 +120,7 @@
         <h6 class="coupcode_text" v-else>
           消費金額滿NT$1,000 即可享 <span style="font-weight:bold">"88折"</span>優惠<br><br>
           目前的消費金額尚差  <span style="color:red">NT${{$filters.currency(1000 - carts.total)}}</span>！
-           <router-link  class="main_btn" to='/products/全部'>繼續選購<span></span></router-link>
+          <router-link  class="main_btn" to='/products/全部'>繼續選購<span></span></router-link>
         </h6>
         <div class="couponcode">
           <input
@@ -146,7 +146,7 @@
         <h5 class="final_price">
           <div>總金額</div>
           <div v-if ="coupon.final_total &&  coupon_code == 'savory88'">
-            NT${{ Math.round(coupon.final_total)}}</div>
+            NT${{ $filters.currency(Math.round(coupon.final_total))}}</div>
           <div v-else  >NT${{$filters.currency(Math.round(carts.total))}}</div>
         </h5>
         </div>
@@ -279,7 +279,7 @@
       <div class="cart_setp_four" :class="{'active':link === 'four'} ">
           <h5>付款成功，感謝你的訂購!</h5>
         <router-link  to='/products/全部' class="main_btn"
-         @click="reset">繼續選購 <span></span></router-link>
+        @click="reset">繼續選購 <span></span></router-link>
       </div>
     </div>
 </section>

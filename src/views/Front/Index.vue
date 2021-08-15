@@ -49,15 +49,12 @@ export default {
       animated.forEach((item) => {
         const thisPos = item.offsetTop;
         console.log(thisPos);
-        if ((windowScrollY + windowHeight) >= thisPos) {
+        if ((windowScrollY + (windowHeight / 1.8)) >= thisPos) {
           item.classList.add('fadeIn');
           // console.log(item);
         }
       });
     },
-  },
-  created() {
-    this.getProducts();
   },
   mounted() {
     this.getProducts();
@@ -73,15 +70,12 @@ export default {
 @import '@/assets/stylesheets/main';
 .animated {
   opacity: 0;
-  -webkit-transition: all 1.5s;
-  -o-transition: all 1.5s;
-  transition: all 1.5s;
+  transition: all 1s;
   transform: translateY(50px);
 }
 .fadeIn {
+
   opacity: 1;
-  -webkit-transform: translateY(0);
-  -ms-transform: translateY(0);
   transform: translateY(0);
 }
 </style>

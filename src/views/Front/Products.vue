@@ -23,12 +23,12 @@
     "slidesPerGroup": 1
   },
   "768": {
-    "slidesPerView": 2.3,
-    "slidesPerGroup": 2.5
+    "slidesPerView": 2,
+    "slidesPerGroup": 2
   },
     "1280": {
     "slidesPerView": 5,
-    "slidesPerGroup": 5
+    "slidesPerGroup": 10
   },
   }'>
       <swiper-slide v-for="(item, index) in   categories" :key="item+index">
@@ -202,17 +202,19 @@ export default {
          // background: $color-main;
         //     color:  $color-main;
         //     color: #fff;
+        .swiper-container{
+          overflow: visible;
+        }
         .list_item{
           text-align:center;
           border: 1px solid $color-main;
           cursor: pointer;
           padding: 20px 40px;
-          margin-right: 2%;
           color: $color-main;
            transition: .3s;
-         &:last-of-type {
-            margin-right: 0%;
-         }
+        //  &:last-of-type {
+        //     margin-right: 0%;
+        //  }
          &.active,&:hover{
            background:  $color-main;
            border: 1px solid #fff;

@@ -174,11 +174,18 @@ export default {
           console.log(res);
           this.getCartData();
           this.isLoading = false;
+          this.$swal.fire({
+            icon: 'success',
+            title: '刪除商品成功',
+            showConfirmButton: false,
+            timer: 2000,
+          });
         });
     },
     scrollNavbar() {
       const windowScrollY = window.scrollY;
       const windowHeight = window.innerHeight;
+      // 由滑動與route.name 判定目前使否在首頁  因為首頁的header與其他不一樣所以要特別做一個
       if (windowScrollY > windowHeight - 1 && this.$route.name === 'index') {
         this.isFixed = true;
       } else if (windowScrollY <= windowHeight && this.$route.name === 'index') {
@@ -203,17 +210,17 @@ export default {
 @import '@/assets/stylesheets/custom/hamburgers';
 @import '@/assets/stylesheets/public';
 
-    ::-webkit-scrollbar {
-        width: 3px;
-        height: 0;
-        background: #c7c7c7;
-    }
+  ::-webkit-scrollbar {
+      width: 3px;
+      height: 0;
+      background: #c7c7c7;
+  }
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: $color-main;
-        margin-right: 20px;
-    }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: $color-main;
+      margin-right: 20px;
+  }
 
 body{
   &.lock{
@@ -225,7 +232,7 @@ body{
     position: absolute;
     width: 100%;
     z-index: 5;
-    transition: .3s;
+    // transition: .1s;
   &.fixed{
     position: fixed;
     width: 100%;
@@ -233,7 +240,7 @@ body{
     left: 0;
     z-index: 10;
     background-color: $color-main;
-    transition: .3s;
+    // transition: .1s;
   }
   &.other_page{
     position: fixed;
@@ -252,7 +259,7 @@ body{
       font-family: 'Yellowtail', cursive;
       align-items: center;
       display: flex;
-   }
+  }
   .bar{
     display: flex;
     justify-content: space-between;
@@ -264,7 +271,7 @@ body{
           height: 100%;
         }
     }
-   .middle_bar{
+  .middle_bar{
       display: flex;
       &.fixed{
           background: $color-main;

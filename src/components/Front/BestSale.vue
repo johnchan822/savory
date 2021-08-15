@@ -3,6 +3,7 @@
         <div class="w1400 inner">
           <h2 class="section_title">主廚精選</h2>
         <div class="web_size">
+          <!-- 左邊最大區塊 -->
           <div class="col50">
           <template  v-for="(item, index) in filterItem" :key="index">
           <router-link  :to="`/product/${item.id}`"
@@ -16,9 +17,11 @@
           </router-link>
           </template>
           </div>
+          <!-- 右邊最大區塊 再切分 -->
           <div class="col50">
+              <!-- 上面兩塊 -->
               <div class="col50">
-            <template  v-for="(item, index) in filterItem" :key="index">
+                <template  v-for="(item, index) in filterItem" :key="index">
               <router-link  :to="`/product/${item.id}`"
                 class="sales_item"
                 v-if="item.level == '2'"
@@ -41,33 +44,32 @@
                     </div>
                   <h6 class="more">了解更多</h6>
                   </router-link>
-            </template>
+                    </template>
                 </div>
-            <div class="col50">
-            <template  v-for="(item, index) in filterItem" :key="index">
-              <router-link  :to="`/product/${item.id}`"
-                class="sales_item"
-                v-if="item.level == '4'"
-                :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <!-- <h4 class="ranking">{{item.level}} </h4> -->
-                <div class="content">
-                  <h4 class="title">{{item.title}}</h4>
-                    </div>
-                  <h6 class="more">了解更多</h6>
-                  </router-link>
-            </template>
-            <template  v-for="(item, index) in filterItem" :key="index">
-                <router-link  :to="`/product/${item.id}`"
-                class="sales_item"
-                v-if="item.level == '5'"
-                :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <!-- <h4 class="ranking">{{item.level}} </h4> -->
-                <div class="content">
-                  <h4 class="title">{{item.title}}</h4>
-                    </div>
-                  <h6 class="more">了解更多</h6>
-                  </router-link>
-            </template>
+                  <!-- 下面兩塊 -->
+                <div class="col50">
+                <template  v-for="(item, index) in filterItem" :key="index">
+                  <router-link  :to="`/product/${item.id}`"
+                    class="sales_item"
+                    v-if="item.level == '4'"
+                    :style="{backgroundImage:`url(${item.imageUrl})`}">
+                    <div class="content">
+                      <h4 class="title">{{item.title}}</h4>
+                        </div>
+                      <h6 class="more">了解更多</h6>
+                      </router-link>
+                </template>
+                <template  v-for="(item, index) in filterItem" :key="index">
+                    <router-link  :to="`/product/${item.id}`"
+                    class="sales_item"
+                    v-if="item.level == '5'"
+                    :style="{backgroundImage:`url(${item.imageUrl})`}">
+                    <div class="content">
+                      <h4 class="title">{{item.title}}</h4>
+                        </div>
+                      <h6 class="more">了解更多</h6>
+                      </router-link>
+                </template>
                 </div>
             </div>
         </div>
@@ -90,11 +92,11 @@
     "slidesPerGroup": 2
   },
   }'
-     class="mySwiper">
+    class="mySwiper">
       <swiper-slide v-for="(item, index) in filterItem" :key="index">
                 <div class="phone_sales_item"
                 :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <h4 class="ranking">No{{item.level}} </h4>
+                        <h4 class="ranking">No.{{item.level}} </h4>
                           <div class="content">
                     <h4  class="title">{{item.title}}</h4></div>
                       <h6 class="more">了解更多</h6>

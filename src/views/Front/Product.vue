@@ -333,6 +333,22 @@ export default {
         }
       }
     }
+    @media screen and(max-width:1440px) {
+      .inner{
+          .product_item{
+              .img{
+              padding-bottom: 20%;
+          }
+          .content{
+            position: relative;
+            padding: 50px;
+            .description{
+              margin:1% 0;
+            }
+          }
+      }
+     }
+    }
     @media screen and(max-width:1280px) {
       .inner{
           .product_item{
