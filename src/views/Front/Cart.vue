@@ -9,13 +9,17 @@
     <div class="inner w1200">
         <div class="step_bar">
           <h6 class="step" :class= "{'active' : link === 'first' }">
-            <div class="circle">1</div>購物車</h6>
-          <h6 class="step" :class= "{'active' : link === 'second' }"
-          ><div class="circle">2</div>填寫資料</h6>
-          <h6 class="step"  :class= "{'active' : link === 'third' }"
-          ><div class="circle">3</div>完成訂單</h6>
-            <h6 class="step" :class= "{'active' : link === 'four' }"
-            ><div class="circle">4</div>付款成功</h6>
+            <div class="circle">1</div>購物車
+          </h6>
+          <h6 class="step" :class= "{'active' : link === 'second' }">
+            <div class="circle">2</div>填寫資料
+          </h6>
+          <h6 class="step"  :class= "{'active' : link === 'third' }">
+            <div class="circle">3</div>完成訂單
+          </h6>
+            <h6 class="step" :class= "{'active' : link === 'four' }">
+              <div class="circle">4</div>付款成功
+            </h6>
         </div>
         <!-- 表單第一區塊 -->
         <div class="cart_step_first" :class="{'active':link === 'first'}">
@@ -113,16 +117,16 @@
               <div class='qty' >X {{cart.qty}}</div>
         </div>
       </div>
-        <h6 class="coupcode_text" v-if=" carts.total >=  1000">
+        <h6 class="coupcode_text" v-if=" carts.total >=  1500">
           消費金額已達NT$1,500元<br><br>
           輸入夏季限時優惠碼 <span style="font-weight:bold">"savory88"</span>即享 88 折 優惠！
         </h6>
         <h6 class="coupcode_text" v-else>
-          消費金額滿NT$1,000 即可享 <span style="font-weight:bold">"88折"</span>優惠<br><br>
-          目前的消費金額尚差  <span style="color:red">NT${{$filters.currency(1000 - carts.total)}}</span>！
+          消費金額滿NT$1,500 即可享 <span style="font-weight:bold">"88折"</span>優惠<br><br>
+          目前的消費金額尚差  <span style="color:red">NT${{$filters.currency(1500 - carts.total)}}</span>！
           <router-link  class="main_btn" to='/products/全部'>繼續選購<span></span></router-link>
         </h6>
-        <div class="couponcode">
+        <div class="couponcode" >
           <input
             type="text"
             class="form-control"
@@ -199,8 +203,7 @@
               </div>
         <div class="btn_group">
           <div class="back_btn" @click="link = 'first'"><span></span>回上一頁 </div>
-  <button class="main_btn" type="sumbit"
-  >確認結帳 <span></span></button>
+              <button class="main_btn" type="sumbit">確認結帳<span></span></button>
         </div>
         </Form>
       </div>
@@ -260,14 +263,6 @@
           <th>收件人付款方式</th>
           <td>{{ order.user.payment_method }}</td>
         </tr>
-        <!-- <tr>
-          <th>付款狀態</th>
-          <td>
-            <span v-if="!order.is_paid">尚未付款</span>
-            <span v-else class="text-success">付款完成</span>
-          </td>
-        </tr> -->
-        <!-- TypeError: Cannot read property 'parentNode' of null -->
         </tbody>
       </table>
       <div>
@@ -318,7 +313,7 @@ export default {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.get(url)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           this.carts = res.data.data;
           this.isLoading = false;
         });
@@ -328,8 +323,8 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
       this.$http.delete(url)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          // console.log(res);
           this.getCartData();
           this.isLoading = false;
           emitter.emit('update-cart');
@@ -340,8 +335,8 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
       this.$http.delete(url)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          // console.log(res);
           this.getCartData();
           this.isLoading = false;
           emitter.emit('update-cart');
@@ -362,8 +357,8 @@ export default {
       };
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
       this.$http.put(url, { data: carts })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          // console.log(res);
           this.getCartData();
           this.isLoading = false;
         });
@@ -374,7 +369,7 @@ export default {
       this.$http.post(url, { data: { code: this.coupon_code } })
         .then((res) => {
           if (res.data.success === true) {
-            console.log(res);
+            // console.log(res);
             this.coupon = res.data.data;
             this.getCartData();
             this.$swal.fire({
@@ -550,10 +545,9 @@ export default {
     @media screen  and(max-width: 1024px){
       .table_overhiden{
       overflow-x: auto;
-       .table{
-    width:1000px;
-
-       }
+        .table{
+          width:1000px;
+        }
       }
     }
     .please_buy{

@@ -36,7 +36,7 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.products = res.data.products;
         this.isLoading = false;
       });
@@ -48,7 +48,7 @@ export default {
       const animated = document.querySelectorAll('.animated');
       animated.forEach((item) => {
         const thisPos = item.offsetTop;
-        console.log(thisPos);
+        // console.log(thisPos);
         if ((windowScrollY + (windowHeight / 1.8)) >= thisPos) {
           item.classList.add('fadeIn');
           // console.log(item);

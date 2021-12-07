@@ -105,11 +105,10 @@ export default {
   },
   methods: {
     getProducts(page = 1) {
-      this.selectCategory = this.$route.params.select;
       this.isLoading = true;
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.products = [...this.products, ...res.data.products];
         this.pagination = res.data.pagination;
         this.getCategories();
@@ -148,7 +147,7 @@ export default {
       };
       this.$http.post(url, { data: cart })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success === true) {
             this.isLoading = false;
             emitter.emit('update-cart');
@@ -170,6 +169,7 @@ export default {
     },
   },
   mounted() {
+    this.selectCategory = this.$route.params.select;
     this.getProducts();
     window.addEventListener('scroll', this.scrollFunction);
   },

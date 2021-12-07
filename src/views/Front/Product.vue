@@ -31,8 +31,9 @@
                         <i class="bi bi-plus-lg"></i>
                       </button>
                   </div>
-                  <button class='main_btn'><div class="bi bi-cart"
-                  @click="addToCart">加入購物車</div><span></span></button>
+                  <button class='main_btn' @click="addToCart">
+                    <div class="bi bi-cart"
+                  >加入購物車</div><span></span></button>
                 </div>
                 <div class="description">
                   <div class="item">
@@ -46,7 +47,6 @@
                 </div>
             </div>
         </div>
-
         <div class="other">
           <h6 class="title">您可能會加點...</h6>
           <swiper :spaceBetween="30" :loop="true"
@@ -103,7 +103,7 @@ export default {
   data() {
     return {
       product: {},
-      products: [],
+      // products: [],
       counter: 1,
       isLoading: false,
     };
@@ -127,7 +127,7 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(url).then((res) => {
-        console.log(res);
+        // console.log(res);
         this.products = res.data.products;
         this.removeItem();
         this.isLoading = false;
@@ -185,6 +185,11 @@ export default {
       }, 500);
     },
   },
+  compouted: {
+    products() {
+      return this.$store.state.prodcuts;
+    },
+  },
   mounted() {
     this.getProduct();
     this.getProducts();
@@ -200,25 +205,25 @@ export default {
       .bread{
         margin: 4% 0;
       }
-        .product_item{
-          margin: 2% 0;
-          background-color: #a5a5a52d;
-          display: flex;
-          width: 100%;
-          .img{
-              padding-bottom: 40%;
-              background-repeat: no-repeat;
-              background-size: cover;
-              background-position: center;
-              width: 50%;
-          }
-          .content{
-            position: relative;
-            padding: 50px;
+      .product_item{
+        margin: 2% 0;
+        background-color: #a5a5a52d;
+        display: flex;
+        width: 100%;
+        .img{
+            padding-bottom: 40%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             width: 50%;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
+        }
+        .content{
+          position: relative;
+          padding: 50px;
+          width: 50%;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
           .title{
             margin-top:2% ;
             margin-bottom: 5%;
@@ -257,20 +262,20 @@ export default {
               }
             }
           }
-      .description{
-            margin: 5% 0;
-            .item{
-              margin:5px 0;
-            h6{
-              padding: 10px 0 10px 0;
-              border-bottom: 1px solid  $color-main;
-              }
-            p{
-              margin: 10px 0 10px 0;
-            }
-            }
+          .description{
+                margin: 5% 0;
+                .item{
+                  margin:5px 0;
+                  h6{
+                    padding: 10px 0 10px 0;
+                    border-bottom: 1px solid  $color-main;
+                  }
+                  p{
+                    margin: 10px 0 10px 0;
+                  }
+                }
           }
-          }
+        }
       }
     }
   .other{
@@ -280,7 +285,6 @@ export default {
     margin: 8% 0 ;
     .title{
       padding: 20px 0 20px;
-      // margin-bottom: 20px;
     }
     .scale{
       overflow: hidden;
@@ -334,20 +338,20 @@ export default {
       }
     }
     @media screen and(max-width:1440px) {
-      .inner{
-          .product_item{
-              .img{
-              padding-bottom: 20%;
-          }
-          .content{
-            position: relative;
-            padding: 50px;
-            .description{
-              margin:1% 0;
+        .inner{
+            .product_item{
+                .img{
+                padding-bottom: 20%;
             }
-          }
+            .content{
+              position: relative;
+              padding: 50px;
+              .description{
+                margin:1% 0;
+              }
+            }
+        }
       }
-     }
     }
     @media screen and(max-width:1280px) {
       .inner{

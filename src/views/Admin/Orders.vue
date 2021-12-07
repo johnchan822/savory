@@ -22,7 +22,7 @@
                   {{ product.product.title}} x  {{ product.qty}}
             </div>
             </td>
-            <td>{{order.total}}</td>
+            <td>{{Math.round(order.total)}}</td>
             <td>
                   <span class="custom-control custom-switch">
                   <input type="checkbox" class="custom-control-input"

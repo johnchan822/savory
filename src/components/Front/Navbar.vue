@@ -156,6 +156,7 @@ export default {
         product_id: cart.id,
         qty: this.cart.qty,
       };
+      // 更新購物車資料
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
       this.$http.put(url, { data: carts })
         .then((res) => {
@@ -172,6 +173,7 @@ export default {
       this.$http.delete(url)
         .then((res) => {
           console.log(res);
+          emitter.emit('update-cartPage');
           this.getCartData();
           this.isLoading = false;
           this.$swal.fire({

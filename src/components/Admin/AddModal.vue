@@ -12,7 +12,7 @@ aria-labelledby="productModalLabel"
             <h5 id="productModalLabel" class="modal-title" v-if="isNew">
               <span>新增產品</span>
             </h5>
-              <h5 id="productModalLabel" class="modal-title" v-else>
+              <h5 id="productModalLabel_2" class="modal-title" v-else>
               <span>編輯產品</span>
             </h5>
             <button type="button" class="btn-close"
@@ -99,13 +99,13 @@ aria-labelledby="productModalLabel"
                     placeholder="請輸入分類" v-model="tempProduct.category">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="price">單位</label>
+                    <label for="unit">單位</label>
                     <input id="unit" type="text" class="form-control"
                     placeholder="請輸入單位" v-model="tempProduct.unit">
                   </div>
                    <div class="form-group col-md-6">
-                    <label for="price">最受歡迎排名</label>
-                    <input id="unit" type="text" class="form-control"
+                    <label for="best">最受歡迎排名</label>
+                    <input id="best" type="text" class="form-control"
                     placeholder="請輸入最後歡迎產品" v-model="tempProduct.level">
                   </div>
                 </div>
