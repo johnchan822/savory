@@ -1,9 +1,7 @@
 <template>
   <div id="navbar" :class="{'fixed':isFixed, 'other_page':isOtherPage}">
     <div class="inner w1800">
-      <router-link to="/"><h2 class="logo">
-        Savory
-      </h2></router-link>
+      <router-link to="/"><h2 class="logo">Savory</h2></router-link>
         <div class ='bar'>
         <ul class= 'middle_bar' :class="{'active':isActive,
           'fixed':isFixed, 'other_page':isOtherPage}">
@@ -16,7 +14,7 @@
         </ul>
         <ul class="icon_bar">
               <li>
-                <div class="cart" @click="getCartData('open')">
+                <div class="cart" @click="getCart('open')">
                   <i class="bi bi-cart3"></i>
                   <small class="cart_count" v-if='cartItemCount !== 0'>{{cartItemCount}}</small>
                   </div>
@@ -61,12 +59,12 @@
                   </td>
                   <td>
                       <div class="counter">
-                      <button  class="less" @click="updateCartData(cart,'less')">
+                      <button  class="less" @click="upateCartItem(cart,'less')">
                         <i class="bi bi-dash-lg" ></i>
                       </button>
                       <input type="number"  min='1' readonly="readonly" v-model.number="cart.qty">
                       <button type="button"
-                      class="add" @click="updateCartData(cart,'add')">
+                      class="add" @click="upateCartItem(cart,'add')">
                         <i class="bi bi-plus-lg"></i>
                       </button>
                   </div>
@@ -76,7 +74,7 @@
                   </td>
                     <td>
                       <button type="button" class="btn  x-btn"
-                    @click="delCartData(cart)">  <i class="bi bi-x-lg"></i>
+                    @click="delCartItem(cart)">  <i class="bi bi-x-lg"></i>
                     </button>
                     </td>
                   <td>
@@ -105,8 +103,6 @@
 </template>
 
 <script>
-import emitter from '@/assets/javascript/emitter';
-
 export default {
   props: ['isOtherPage'],
   data() {
@@ -114,10 +110,7 @@ export default {
       isFixed: false,
       isActive: false,
       isCartActive: false,
-      carts: {},
       cart: [],
-      isLoading: false,
-      cartItemCount: 0,
     };
   },
   methods: {
@@ -126,63 +119,29 @@ export default {
       // document.querySelector('body').classList.toggle('lock');
       console.log(this.isActive);
     },
-    // 取得購物車數量內容
-    getCartData(status) {
+    getCart(status) {
       if (status === 'open') {
         this.isCartActive = true;
         document.querySelector('body').classList.toggle('lock');
       }
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(url)
-        .then((res) => {
-          console.log(res);
-          this.carts = res.data.data;
-          this.cartItemCount = res.data.data.carts.length;
-        });
+      this.$store.dispatch('getCart');
     },
     cartClose() {
       this.isCartActive = false;
       document.querySelector('body').classList.remove('lock');
     },
-    updateCartData(cart, status) {
-      this.isLoading = true;
+    upateCartItem(cart, status) {
       if (status === 'add') {
         this.cart.qty = cart.qty + 1;
       } else if (status === 'less' && cart.qty > 1) {
         this.cart.qty = cart.qty - 1;
       }
-      this.isLoading = true;
-      const carts = {
-        product_id: cart.id,
-        qty: this.cart.qty,
-      };
-      // 更新購物車資料
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
-      this.$http.put(url, { data: carts })
-        .then((res) => {
-          emitter.emit('update-cartPage');
-          console.log(res);
-          this.getCartData();
-          this.isLoading = false;
-        });
+      const product = cart.id;
+      const qtys = this.cart.qty;
+      this.$store.dispatch('upateCartItem', { product, qtys });
     },
-    // 刪除單筆資料
-    delCartData(cart) {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
-      this.$http.delete(url)
-        .then((res) => {
-          console.log(res);
-          emitter.emit('update-cartPage');
-          this.getCartData();
-          this.isLoading = false;
-          this.$swal.fire({
-            icon: 'success',
-            title: '刪除商品成功',
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        });
+    delCartItem(cart) {
+      this.$store.dispatch('delCartItem', cart);
     },
     scrollNavbar() {
       const windowScrollY = window.scrollY;
@@ -196,13 +155,21 @@ export default {
     },
   },
   created() {
-    this.getCartData();
+    this.getCart();
+  },
+  computed: {
+    carts() {
+      return this.$store.state.carts;
+    },
+    cartItemCount() {
+      return this.$store.state.cartsItemCount;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.scrollNavbar);
-    emitter.on('update-cart', () => {
-      this.getCartData();
-    });
   },
 };
 </script>
@@ -351,10 +318,8 @@ body{
           display: flex;
           align-items: center;
       }
-
     }
   }
-
 }
 .cart_lightbox{
       &.active{
@@ -489,11 +454,6 @@ body{
             width: 100%;
             .add,.less{
               display: none;
-              // &:hover{
-              //     background: $color-main;
-              //     transition: .3s;
-              //     color:#fff;
-              // }
             }
             .add{
               border-left-style: none;

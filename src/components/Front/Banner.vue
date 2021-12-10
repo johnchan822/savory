@@ -1,5 +1,5 @@
 <template>
-<section id="banner" :style="{backgroundImage:`url(https://storage.googleapis.com/vue-course-api.appspot.com/johnhexschool/1626441492382.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=P1kO2ZA8tcxSGTHkJtHEcQij5DOOdr%2FRtznTrzqta60mtDgQvsd5GJnPUWbiqGUlBjYBmSBPVwpSmgy9j83fgZw4w8pUW4btf1FbVsajZRbZsm5wiB4FOmAtIzWaIWlmDMTgHEZx53Esl5XNJtzEH66VQaS%2BrYoBKRMxR4GDba%2BirG3hFBQEryd%2FACjQR9DoaaI7PBEYv1gMmhSqGDY%2FaRg2PHMpvO4G2dmzo%2F24pHIqmJpA8HL2nVAPxK8tFsaai3xhXzwm4%2BEmGoOCo0jXkiolXQuomoKgos%2F31T0pmJGQFOZghG8lxv5ZESOYUKwVLRGGmvisjmvcZ89Q42W99w%3D%3D)`}" >
+<section id="banner" :style="{backgroundImage:`url(https://storage.googleapis.com/vue-course-api.appspot.com/johnhexschool/1639156624727.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=jKm4jNjTFenM9q1mXZQSC9BA7dPUbYJwnQpbvcOEiLlO2cRzLsQraLVIULhTmLCW8T%2F286y96fya8MAf2hBJ%2F46Gk4emLv49Hd%2BRsRQ%2BpCbQzf25MKxWRzYP7KxYL9uiaREdYYPfYfV8ktFTl1c6GZ22lSq626SefsK%2F39C55QvgF010Lpp%2Bd7CtTUd%2BCxbb9jsZVeojGgSGBHcOx%2BlLrFmHxCxFBg4eF966f8sswbP6ksSL2suSw47UUh4h1xD0RseFGiV%2FO%2Fi1pJtaTYnAk5sq%2BT0hTkdt8fT4zPbH4Fmpkzc5DHfwbKhJj5CsHrmav9B9ne0QxukRCP9iHzQOZQ%3D%3D)`}" >
         <div class="inner w1400">
           <h3 clas="title"> Savory </h3>
           <p>英文「閒暇」意思，放慢您的步調享受生活的樂趣。</p>

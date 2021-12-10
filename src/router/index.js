@@ -70,6 +70,7 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  mode: 'history',
   scrollBehavior() {
     return { top: 0 };
   },

@@ -2,7 +2,7 @@
 <section id="index_about">
  <h2 class="section_title">關於我們</h2>
   <div class="inner w1400">
-        <div class="background" :style="{backgroundImage:`url(https://storage.googleapis.com/vue-course-api.appspot.com/johnhexschool/1626583559107.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=fnRe2GhGtI%2BKQ4VSRIKjmkiObYwdyv2K7aaKpZ%2B7o9U0n4ybvY4nnb6vyvnWb7witY8szI1ZNg3gnIeA9lWJaC9zgW8iMAWGEqI0LgQEqIf9urx8MfPXeVOu581QPMXhLt9dMOiGS54OB6JmqDBaimPxV2kTtu2%2BG4W5q0Swgjt8x1ye3wA0YJfMvyuqwwytZK8tj%2BsNuwPtdQIh5CqsFjOFQzBvX1H5AbY8MSp2TUucrwtWRW2TSGBNoWym89e3YoM8%2BgGEZDTzdckPN4VSonZly23XTfURZ6Vil9bK5x5kIJgnGb5yYuriyjL4LmQmQ76fpznusXg2ZTTj1R6Zpg%3D%3D)`}" >
+        <div class="background" :style="{backgroundImage:`url(https://storage.googleapis.com/vue-course-api.appspot.com/johnhexschool/1639157155931.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=gVCdh2PQ3sq94lysKQf63Uj4rtCJcyEsbT7Ef1eHNHzMxaTJNk9vf10GkhQLcnEk9hNamMYv8EmfeRcCL3Ce%2Bm7nQb7Htq8BoFLbj%2BOpCDbPJOBM%2F5Ir8gcp%2BDmiaLJdXdYbz%2BUK7ldwj5G6wXAW9E34j2%2BS1E8fLYWyJTGlUhdIR0ETZ92g6Dn3pdtIK12iF7WLwZi78JHNqUEG4BSEcgkMyCN82vaIkU8LSQ14cAlhsZ4ID9MpPD%2Fb30fyfM5s9ahXBrqE3wxLSZtJvzJSd2gVM2ZEuO%2BDeUD5uvWICM8yvmU0WiN2%2Fpsp03ESwGgzG4Cm%2BNeDurJPnIKliG1Rug%3D%3D)`}" >
         </div>
       <div class="content">
         <h2>Savory</h2>

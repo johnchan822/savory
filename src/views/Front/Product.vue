@@ -1,7 +1,8 @@
 <template>
 <Loading :active="isLoading"></Loading>
   <div id="product">
-    <div class="section_banner" :style="{backgroundImage:`url(${product.imageUrl})`}">
+    <div class="section_banner"
+    :style="{backgroundImage:`url(${product.imageUrl})`}">
       <div class="w1400">
         <h1 class="title">{{product.title}}</h1>
       </div>
@@ -15,7 +16,8 @@
       :to="`/product/${product.id}`">{{product.title}}  </router-link>
       </div>
         <div class="product_item">
-              <div class="img"  :style="{backgroundImage:`url(${product.imageUrl})`}"></div>
+              <div class="img"
+              :style="{backgroundImage:`url(${product.imageUrl})`}"></div>
             <div class="content">
                 <p class="tag">{{product.category}}</p>
                 <h5 class="title">{{product.title}}</h5>
@@ -92,20 +94,14 @@
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper.scss';
 import 'swiper/components/pagination/pagination.min.css';
-import SwiperCore, {
-  Autoplay, EffectFade,
-} from 'swiper/core';
-import emitter from '@/assets/javascript/emitter';
+import SwiperCore, { Autoplay, EffectFade } from 'swiper/core';
 
 SwiperCore.use([Autoplay, EffectFade]);
 
 export default {
   data() {
     return {
-      product: {},
-      // products: [],
       counter: 1,
-      isLoading: false,
     };
   },
   components: {
@@ -113,26 +109,6 @@ export default {
     SwiperSlide,
   },
   methods: {
-    getProduct() {
-      this.isLoading = true;
-      const { id } = this.$route.params;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${id}`;
-      this.$http.get(url).then((res) => {
-        // console.log(res);
-        this.product = res.data.product;
-        this.isLoading = false;
-      });
-    },
-    getProducts() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
-      this.$http.get(url).then((res) => {
-        // console.log(res);
-        this.products = res.data.products;
-        this.removeItem();
-        this.isLoading = false;
-      });
-    },
     less() {
       this.counter -= 1;
       if (this.counter < 1) {
@@ -143,56 +119,42 @@ export default {
       this.counter += 1;
     },
     addToCart() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
       const { id } = this.$route.params;
-      const cart = {
-        product_id: id,
-        qty: this.counter,
-      };
-      this.$http.post(url, { data: cart })
-        .then((res) => {
-          if (res.data.success === true) {
-            emitter.emit('update-cart');
-            this.isLoading = false;
-            this.$swal.fire({
-              icon: 'success',
-              title: '加入購物車成功',
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          } else {
-            this.$swal.fire({
-              icon: 'error',
-              title: '加入購物車失敗',
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          }
+      const qty = this.counter;
+      this.$store.dispatch('addToCart', { id, qty });
+      if (this.isSwal) {
+        this.$swal.fire({
+          icon: 'success',
+          title: '加入購物車成功',
+          showConfirmButton: false,
+          timer: 2000,
         });
-    },
-    removeItem() {
-      const { id } = this.$route.params;
-      this.products.forEach((item, index) => {
-        if (item.id === id) {
-          this.products.splice(index, 1);
-        }
-      });
+      }
     },
     reset() {
       setTimeout(() => {
         this.$router.go(0);
-      }, 500);
+      }, 100);
     },
   },
-  compouted: {
+  computed: {
     products() {
-      return this.$store.state.prodcuts;
+      return this.$store.state.products;
+    },
+    product() {
+      return this.$store.state.product;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    isSwal() {
+      return this.$store.state.isSwal;
     },
   },
   mounted() {
-    this.getProduct();
-    this.getProducts();
+    const { id } = this.$route.params;
+    this.$store.dispatch('getProduct', id);
+    this.$store.dispatch('getProducts');
   },
 };
 </script>

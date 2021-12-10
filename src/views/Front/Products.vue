@@ -8,7 +8,7 @@
         <h1 class="title">{{item.title}}</h1>
       </div>
     </div>
-    </template>
+  </template>
   <div class="w1400 inner">
 <swiper :spaceBetween="30" :loop="false"
 :autoplay='{
@@ -31,27 +31,29 @@
     "slidesPerGroup": 10
   },
   }'>
-      <swiper-slide v-for="(item, index) in   categories" :key="item+index">
-                  <div class="list_item" @click.prevent="selectCategory = item"
-                  :class="{ 'active' : item === selectCategory}" >
-                    {{item}} </div>
-              </swiper-slide>
-        </swiper>
-        <div class="all_products">
-              <router-link class="product_item"  v-for=" (item, key) in  filterProducts"
-                :key=item.id+key  :to="`/product/${item.id}`">
-                <div class="overflow">
-                <div class="img" :style="{backgroundImage:`url(${item.imageUrl})`}" ></div>
-                </div>
-                    <div class="content">
-                  <div class="tag">{{item.category}}</div>
-                <h6 class="prodcut_title">{{item.title}}</h6>
-                <p class="prodcut_title">NT${{$filters.currency(item.price)}}</p>
-                      <button class='main_btn' @click.prevent='addToCart(item.id)'>
-                  <div class="bi bi-cart">加入購物車</div><span></span></button>
+<swiper-slide v-for="(item, index) in   categories" :key="item+index">
+  <div class="list_item" @click.prevent="selectCategory = item"
+  :class="{ 'active' : item === selectCategory}" >
+    {{item}}
+  </div>
+</swiper-slide>
+</swiper>
+  <div class="all_products">
+        <router-link class="product_item"  v-for=" (item, key) in  filterProducts"
+          :key=item.id+key  :to="`/product/${item.id}`">
+          <div class="overflow">
+            <div class="img" :style="{backgroundImage:`url(${item.imageUrl})`}" ></div>
+          </div>
+              <div class="content">
+                <div class="tag">{{item.category}}</div>
+                    <h6 class="prodcut_title">{{item.title}}</h6>
+                        <p class="prodcut_title">NT${{$filters.currency(item.price)}}</p>
+                          <button class='main_btn' @click.prevent='addToCart(item.id)'>
+                            <div class="bi bi-cart">加入購物車</div><span></span>
+                        </button>
               </div>
-            </router-link>
-            </div>
+      </router-link>
+      </div>
     <div id="domGetNewPage" ref="pagination"></div>
         </div>
     </div>
@@ -60,16 +62,12 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper.scss';
-import emitter from '@/assets/javascript/emitter';
 
 export default {
   data() {
     return {
-      products: [],
       selectCategory: '全部',
-      categories: [],
       pagination: {},
-      isLoading: false,
       sectionBanner: [
         {
           category: '甜點',
@@ -104,26 +102,8 @@ export default {
     SwiperSlide,
   },
   methods: {
-    getProducts(page = 1) {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products?page=${page}`;
-      this.$http.get(url).then((res) => {
-        // console.log(res);
-        this.products = [...this.products, ...res.data.products];
-        this.pagination = res.data.pagination;
-        this.getCategories();
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 500);
-      });
-    },
-    getCategories() {
-      const categories = new Set();
-      this.products.forEach((item) => {
-        categories.add(item.category);
-      });
-      this.categories = [...categories];
-      this.categories.unshift('全部');
+    getProducts() {
+      this.$store.dispatch('getProducts');
     },
     scrollFunction() {
       // 1.取得當前滾動位置
@@ -132,40 +112,21 @@ export default {
         const windowScrollY = window.scrollY; // 目前捲動位置
         const windowHeight = window.innerHeight; // 畫面的高度
         const current = windowScrollY + windowHeight;
-        // console.log(windowScrollY, windowHeight);
         if (current > pageDom && this.pagination.has_next) {
           this.getProducts(this.pagination.current_page + 1);
         }
       }
     },
-    addToCart(id) {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      const cart = {
-        product_id: id,
-        qty: 1,
-      };
-      this.$http.post(url, { data: cart })
-        .then((res) => {
-          // console.log(res);
-          if (res.data.success === true) {
-            this.isLoading = false;
-            emitter.emit('update-cart');
-            this.$swal.fire({
-              icon: 'success',
-              title: '加入購物車成功',
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          } else {
-            this.$swal.fire({
-              icon: 'error',
-              title: '加入購物車失敗',
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          }
+    addToCart(id, qty = 1) {
+      this.$store.dispatch('addToCart', { id, qty });
+      if (this.isSwal) {
+        this.$swal.fire({
+          icon: 'success',
+          title: '加入購物車成功',
+          showConfirmButton: false,
+          timer: 2000,
         });
+      }
     },
   },
   mounted() {
@@ -183,6 +144,18 @@ export default {
       }
       return this.products;
     },
+    products() {
+      return this.$store.state.products;
+    },
+    categories() {
+      return this.$store.state.categories;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    isSwal() {
+      return this.$store.state.isSwal;
+    },
   },
 };
 </script>
@@ -194,14 +167,6 @@ export default {
     margin-bottom:3%;
     .inner{
       padding: 3% 0;
-      // .list{
-      //   text-align: center;
-        // width: 100%;
-        // display: flex;
-        // justify-content: center;
-         // background: $color-main;
-        //     color:  $color-main;
-        //     color: #fff;
         .swiper-container{
           overflow: visible;
         }
@@ -211,18 +176,14 @@ export default {
           cursor: pointer;
           padding: 20px 40px;
           color: $color-main;
-           transition: .3s;
-        //  &:last-of-type {
-        //     margin-right: 0%;
-        //  }
-         &.active,&:hover{
-           background:  $color-main;
-           border: 1px solid #fff;
-           color: #fff;
-           transition: .3s;
-         }
+          transition: .3s;
+        &.active,&:hover{
+          background:  $color-main;
+          border: 1px solid #fff;
+          color: #fff;
+          transition: .3s;
         }
-      // }
+        }
       .all_products{
         width: 100%;
         flex-wrap: wrap;
@@ -250,7 +211,7 @@ export default {
             width: 100%;
             transition: .3s;
             }
-            .img{
+          .img{   filter: grayscale(0%) !important;
                   transition: .3s;
                   transform: scale(1.1);
             }
@@ -267,6 +228,7 @@ export default {
             .overflow{
               overflow: hidden;
             .img{
+              filter: grayscale(30%);
               transition: .3s;
               padding-bottom: 60%;
               background-repeat: no-repeat;

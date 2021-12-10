@@ -5,49 +5,50 @@
         <div class="web_size">
           <!-- 左邊最大區塊 -->
           <div class="col50">
-          <template  v-for="(item, index) in filterItem" :key="index">
-          <router-link  :to="`/product/${item.id}`"
-          class="sales_item xl_size" v-if="item.level == '1'"
-            :style="{backgroundImage:`url(${item.imageUrl})`}">
-                  <h6 class="ranking">No.{{item.level}} </h6>
-                <div class="content">
-                  <h4 class="title">{{item.title}}</h4>
-                    <p>{{ item.description}}</p></div>
-                  <h6 class="more">了解更多</h6>
-          </router-link>
-          </template>
+            <template  v-for="(item, index) in filterItem" :key="index">
+            <router-link  :to="`/product/${item.id}`"
+            class="sales_item xl_size" v-if="item.level == '1'"
+              :style="{backgroundImage:`url(${item.imageUrl})`}">
+                    <h6 class="ranking">No.{{item.level}} </h6>
+                  <div class="content">
+                    <h4 class="title">{{item.title}}</h4>
+                      <p>{{ item.description}}</p>
+                  </div>
+                    <h6 class="more">了解更多</h6>
+            </router-link>
+            </template>
           </div>
           <!-- 右邊最大區塊 再切分 -->
           <div class="col50">
               <!-- 上面兩塊 -->
               <div class="col50">
                 <template  v-for="(item, index) in filterItem" :key="index">
-              <router-link  :to="`/product/${item.id}`"
-                class="sales_item"
-                v-if="item.level == '2'"
-                :style="{backgroundImage:`url(${item.imageUrl})`}">
-                        <h6 class="ranking">No.{{item.level}} </h6>
-                <div class="content">
-                  <h4 class="title">{{item.title}}</h4>
+                  <router-link  :to="`/product/${item.id}`"
+                    class="sales_item"
+                    v-if="item.level == '2'"
+                    :style="{backgroundImage:`url(${item.imageUrl})`}">
+                            <h6 class="ranking">No.{{item.level}} </h6>
+                    <div class="content">
+                      <h4 class="title">{{item.title}}</h4>
+                        </div>
+                      <h6 class="more">了解更多</h6>
+                      </router-link>
+                </template>
+                <template  v-for="(item, index) in filterItem" :key="index">
+                  <router-link  :to="`/product/${item.id}`"
+                    class="sales_item"
+                    v-if="item.level == '3'"
+                    :style="{backgroundImage:`url(${item.imageUrl})`}">
+                          <h6 class="ranking">No.{{item.level}} </h6>
+                    <div class="content">
+                      <h4 class="title">{{item.title}}</h4>
                     </div>
-                  <h6 class="more">了解更多</h6>
+                      <h6 class="more">了解更多</h6>
                   </router-link>
-            </template>
-            <template  v-for="(item, index) in filterItem" :key="index">
-              <router-link  :to="`/product/${item.id}`"
-                class="sales_item"
-                v-if="item.level == '3'"
-                :style="{backgroundImage:`url(${item.imageUrl})`}">
-                      <h6 class="ranking">No.{{item.level}} </h6>
-                <div class="content">
-                  <h4 class="title">{{item.title}}</h4>
-                    </div>
-                  <h6 class="more">了解更多</h6>
-                  </router-link>
-                    </template>
-                </div>
+                </template>
+              </div>
                   <!-- 下面兩塊 -->
-                <div class="col50">
+              <div class="col50">
                 <template  v-for="(item, index) in filterItem" :key="index">
                   <router-link  :to="`/product/${item.id}`"
                     class="sales_item"
@@ -55,9 +56,9 @@
                     :style="{backgroundImage:`url(${item.imageUrl})`}">
                     <div class="content">
                       <h4 class="title">{{item.title}}</h4>
-                        </div>
+                    </div>
                       <h6 class="more">了解更多</h6>
-                      </router-link>
+                  </router-link>
                 </template>
                 <template  v-for="(item, index) in filterItem" :key="index">
                     <router-link  :to="`/product/${item.id}`"
@@ -66,12 +67,12 @@
                     :style="{backgroundImage:`url(${item.imageUrl})`}">
                     <div class="content">
                       <h4 class="title">{{item.title}}</h4>
-                        </div>
+                    </div>
                       <h6 class="more">了解更多</h6>
-                      </router-link>
+                    </router-link>
                 </template>
-                </div>
-            </div>
+              </div>
+          </div>
         </div>
       </div>
   <div class="phone_size">
@@ -152,7 +153,7 @@ export default {
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 @import '@/assets/stylesheets/main';
-  #sales{
+#sales{
     margin:3% 0 8%;
 background: #ffffff;
 .section_title{
@@ -244,9 +245,9 @@ background: #ffffff;
             width: 100%;
             text-align: center;
             padding: 8px 0;
-             opacity: 0;
+            opacity: 0;
             h6{
-               font-weight: bold;
+              font-weight: bold;
             }
             &:hover{
                 opacity: 1;
@@ -254,80 +255,78 @@ background: #ffffff;
                 background: $color-main;
                 h6{
                 color: #ffffff;
-               }
+              }
             }
         }
 }
 .xl_size{
-   padding-bottom: 92%;
+  padding-bottom: 92%;
 }
 @media screen and( max-width:1024px) {
     .web_size{
   display: none;
 }
-   .phone_size{
+  .phone_size{
   display: block;
     width: 90%;
     margin: auto;
-.phone_sales_item{
-  cursor: pointer;
-        margin: 12px 10px;
-        border-radius: 4px;
-        position: relative;
-        padding-bottom: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        &::before{
-          content: "";
+  .phone_sales_item{
+    cursor: pointer;
+          margin: 12px 10px;
           border-radius: 4px;
-          position: absolute;
-          background: #05050563;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-        }
-        .ranking{
-            background: $color-main;
+          position: relative;
+          padding-bottom: 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          &::before{
+            content: "";
+            border-radius: 4px;
             position: absolute;
+            background: #05050563;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+          }
+          .ranking{
+              background: $color-main;
+              position: absolute;
+              color: #ffffff;
+              left: 0%;
+              top: 0%;
+              padding:10px 16px;
+              // font-family: 'Yellowtail', cursive;
+          }
+          .content{
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: #ffffff;
-            left: 0%;
-            top: 0%;
-            padding:10px 16px;
-            // font-family: 'Yellowtail', cursive;
-        }
-        .content{
-          position: absolute;
-          top:50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color: #ffffff;
-          .title{
-            text-align: center;
-            width: 100%;
+            .title{
+              text-align: center;
+              width: 100%;
+            }
+            p{
+              margin-top:20px;
+              width: 100%;
+              opacity: 0;
+            }
           }
-          p{
-            margin-top:20px;
-            width: 100%;
-            opacity: 0;
+          .more{
+              transition: .3s;
+              position: absolute;
+              bottom: 0;
+              background: $color-main;
+              width: 100%;
+              text-align: center;
+              padding: 6px 0;
+              font-weight: bold;
+              color:#ffffff
           }
-        }
-        .more{
-            transition: .3s;
-            position: absolute;
-            bottom: 0;
-             background: $color-main;
-            width: 100%;
-            text-align: center;
-            padding: 6px 0;
-               font-weight: bold;
-               color:#ffffff
-}
-
-}
-
-}
   }
-  }
+}
+}
+}
 </style>

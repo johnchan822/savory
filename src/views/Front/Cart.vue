@@ -49,12 +49,12 @@
                   </td>
                   <td>
                       <div class="counter">
-                      <button  class="less" @click="updateCartData(cart,'less')">
+                      <button  class="less" @click="upateCartItem(cart,'less')">
                         <i class="bi bi-dash-lg" ></i>
                       </button>
                       <input type="number"  min='1' readonly="readonly" v-model.number="cart.qty">
                       <button type="button"
-                      class="add" @click="updateCartData(cart,'add')">
+                      class="add" @click="upateCartItem(cart,'add')">
                         <i class="bi bi-plus-lg"></i>
                       </button>
                   </div>
@@ -67,7 +67,7 @@
                   </td>
                   <td>
                     <button type="button" class="btn  x-btn"
-                    @click="delCartData(cart)">
+                    @click="delCartItem(cart)">
                     <i class="bi bi-x-lg "></i>
                     </button>
                   </td>
@@ -88,8 +88,7 @@
           </table>
         </div>
           <div class="flex_right">
-                  <button class="main_btn next_btn"
-                type="button" @click="link ='second'">
+                  <button class="main_btn next_btn" type="button" @click="link ='second'">
                 下一步<span></span></button>
           </div>
         </template>
@@ -206,7 +205,7 @@
               <button class="main_btn" type="sumbit">確認結帳<span></span></button>
         </div>
         </Form>
-      </div>
+    </div>
         <!-- 表單第三區塊 -->
     <div class="cart_setp_third" :class="{'active':link === 'third'}">
     <form @submit.prevent="payOrder">
@@ -269,7 +268,7 @@
         <h6 class="pay_btn" @click="payOrder(), link = 'four'">確認付款</h6>
       </div>
     </form>
-      </div>
+    </div>
         <!-- 表單第四區塊 -->
       <div class="cart_setp_four" :class="{'active':link === 'four'} ">
           <h5>付款成功，感謝你的訂購!</h5>
@@ -281,14 +280,12 @@
 </template>
 
 <script>
-import emitter from '@/assets/javascript/emitter';
 
 export default {
   data() {
     return {
       link: 'first',
-      carts: {},
-      cart: {},
+      cart: [],
       user: {
         email: '',
         name: '',
@@ -298,7 +295,6 @@ export default {
         payment_method: '',
       },
       isNotice: true,
-      isLoading: false,
       coupon_code: '',
       coupon: {},
       order: {
@@ -308,60 +304,27 @@ export default {
     };
   },
   methods: {
-    getCartData() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(url)
-        .then((res) => {
-          // console.log(res);
-          this.carts = res.data.data;
-          this.isLoading = false;
-        });
+    getCart() {
+      this.$store.dispatch('getCart');
     },
     // 刪除單筆資料
-    delCartData(cart) {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
-      this.$http.delete(url)
-        .then(() => {
-          // console.log(res);
-          this.getCartData();
-          this.isLoading = false;
-          emitter.emit('update-cart');
-        });
+    delCartItem(cart) {
+      this.$store.dispatch('delCartItem', cart);
     },
     // 刪除全部資料
     delAllCartData() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`;
-      this.$http.delete(url)
-        .then(() => {
-          // console.log(res);
-          this.getCartData();
-          this.isLoading = false;
-          emitter.emit('update-cart');
-        });
+      this.$store.dispatch('dellAllCart');
     },
     // 更新購物車數量內容
-    updateCartData(cart, status) {
-      this.isLoading = true;
+    upateCartItem(cart, status) {
       if (status === 'add') {
         this.cart.qty = cart.qty + 1;
       } else if (status === 'less' && cart.qty > 1) {
         this.cart.qty = cart.qty - 1;
       }
-      this.isLoading = true;
-      const carts = {
-        product_id: cart.id,
-        qty: this.cart.qty,
-      };
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${cart.id}`;
-      this.$http.put(url, { data: carts })
-        .then(() => {
-          // console.log(res);
-          this.getCartData();
-          this.isLoading = false;
-        });
+      const product = cart.id;
+      const qtys = this.cart.qty;
+      this.$store.dispatch('upateCartItem', { product, qtys });
     },
     // 使用優惠劵
     addCouponCode() {
@@ -369,9 +332,8 @@ export default {
       this.$http.post(url, { data: { code: this.coupon_code } })
         .then((res) => {
           if (res.data.success === true) {
-            // console.log(res);
             this.coupon = res.data.data;
-            this.getCartData();
+            this.getCart();
             this.$swal.fire({
               icon: 'success',
               title: '已使用優惠劵',
@@ -379,7 +341,7 @@ export default {
               timer: 2000,
             });
           } else {
-            this.getCartData();
+            this.getCart();
             this.$swal.fire({
               icon: 'error',
               title: '優惠劵代碼錯誤',
@@ -418,7 +380,6 @@ export default {
             showConfirmButton: false,
             timer: 2000,
           });
-          emitter.emit('update-cart');
         });
     },
     getOrder() {
@@ -446,10 +407,15 @@ export default {
     },
   },
   created() {
-    this.getCartData();
-    emitter.on('update-cartPage', () => {
-      this.getCartData();
-    });
+    this.getCart();
+  },
+  computed: {
+    carts() {
+      return this.$store.state.carts;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
 };
 </script>

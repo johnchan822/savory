@@ -1,9 +1,11 @@
 // 1.匯入
 import { createApp } from 'vue';
 // 匯入axios套件
+// import store from '@/store;
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 // 匯入 vee-validate 主套件
+import store from '@/store/index';
 import {
   Field, Form, ErrorMessage, defineRule, configure,
 } from 'vee-validate';
@@ -44,6 +46,7 @@ app.config.globalProperties.$filters = {
   currency,
 };
 
+app.use(store);
 app.config.globalProperties.$httpMessageState = $httpMessageState;
 app.use(VueSweetalert2);
 app.component('Form', Form);

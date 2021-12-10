@@ -19,8 +19,6 @@ import Banner from '@/components/Front/Banner.vue';
 export default {
   data() {
     return {
-      products: [],
-      isLoading: false,
     };
   },
   components: {
@@ -33,13 +31,7 @@ export default {
   },
   methods: {
     getProducts() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
-      this.$http.get(url).then((res) => {
-        // console.log(res);
-        this.products = res.data.products;
-        this.isLoading = false;
-      });
+      this.$store.dispatch('getProducts');
     },
     scrollFunction() {
       // 1.取得當前滾動位置
@@ -62,6 +54,14 @@ export default {
   },
   unmounted() {
     window.removeEventListener('scroll', this.scrollFunction);
+  },
+  computed: {
+    products() {
+      return this.$store.state.products;
+    },
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
   },
 };
 
